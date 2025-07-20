@@ -1,13 +1,17 @@
 package main
 
+import "fmt"
+
 func main() {
- 	shirtItem := newItem("Nike Shirt")
+	pizza := &VeggieMania{}
 
-  observerFirst := &Customer{id: "abc@gmail.com"}
-  observerSecond := &Customer{id: "xyz@gmail.com"}
+  pizzaWithCheese := &CheeseTopping{
+      pizza: pizza,
+  }
 
-  shirtItem.register(observerFirst)
-  shirtItem.register(observerSecond)
+  pizzaWithCheeseAndTomato := &TomatoTopping{
+      pizza: pizzaWithCheese,
+  }
 
-  shirtItem.updateAvailability()
+  fmt.Printf("Price of Veggie Mania with tomato and cheese topping is %d\n", pizzaWithCheeseAndTomato.getPrice())
 }
