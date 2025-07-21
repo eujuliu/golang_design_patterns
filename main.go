@@ -3,22 +3,20 @@ package main
 import "fmt"
 
 func main() {
-	game := newGame()
+	normalBuilder := getBuilder("normal")
+	iglooBuilder := getBuilder("igloo")
 
-    //Add Terrorist
-    game.addTerrorist(TerroristDressType)
-    game.addTerrorist(TerroristDressType)
-    game.addTerrorist(TerroristDressType)
-    game.addTerrorist(TerroristDressType)
+	director := newDirector(normalBuilder)
+	normalHouse := director.buildHouse()
 
-    //Add CounterTerrorist
-    game.addCounterTerrorist(CounterTerroristDressType)
-    game.addCounterTerrorist(CounterTerroristDressType)
-    game.addCounterTerrorist(CounterTerroristDressType)
+	fmt.Printf("Normal House Door Type: %s\n", normalHouse.doorType)
+	fmt.Printf("Normal House Window Type: %s\n", normalHouse.windowType)
+	fmt.Printf("Normal House Num Floor: %d\n", normalHouse.floor)
 
-    dressFactoryInstance := getDressFactorySingleInstance()
+	director.setBuilder(iglooBuilder)
+	iglooHouse := director.buildHouse()
 
-    for dressType, dress := range dressFactoryInstance.dresses {
-        fmt.Printf("DressColorType: %s\nDressColor: %s\n", dressType, dress.getColor())
-    }
+	fmt.Printf("\nIgloo House Door Type: %s\n", iglooHouse.doorType)
+	fmt.Printf("Igloo House Window Type: %s\n", iglooHouse.windowType)
+	fmt.Printf("Igloo House Num Floor: %d\n", iglooHouse.floor)
 }
