@@ -1,18 +1,24 @@
 package main
 
+import "fmt"
+
 func main() {
-	cashier := &Cashier{}
+	nginxServer := newNginxServer()
+	appStatusURL := "/app/status"
+	createuserURL := "/create/user"
 
-	medical := &Medical{}
-	medical.setNext(cashier)
+	httpCode, body := nginxServer.handleRequest(appStatusURL, "GET")
+	fmt.Printf("\nUrl: %s\nHttpCode: %d\nBody: %s\n", appStatusURL, httpCode, body)
 
-	doctor := &Doctor{}
-	doctor.setNext(medical)
+	httpCode, body = nginxServer.handleRequest(appStatusURL, "GET")
+	fmt.Printf("\nUrl: %s\nHttpCode: %d\nBody: %s\n", appStatusURL, httpCode, body)
 
-	reception := &Reception{}
-	reception.setNext(doctor)
+	httpCode, body = nginxServer.handleRequest(appStatusURL, "GET")
+	fmt.Printf("\nUrl: %s\nHttpCode: %d\nBody: %s\n", appStatusURL, httpCode, body)
 
-	patient := &Patient{name: "abc"}
+	httpCode, body = nginxServer.handleRequest(createuserURL, "POST")
+	fmt.Printf("\nUrl: %s\nHttpCode: %d\nBody: %s\n", appStatusURL, httpCode, body)
 
-	reception.execute(patient)
+	httpCode, body = nginxServer.handleRequest(createuserURL, "GET")
+	fmt.Printf("\nUrl: %s\nHttpCode: %d\nBody: %s\n", appStatusURL, httpCode, body)
 }
