@@ -3,22 +3,22 @@ package main
 import "fmt"
 
 func main() {
-	nginxServer := newNginxServer()
-	appStatusURL := "/app/status"
-	createuserURL := "/create/user"
+	game := newGame()
 
-	httpCode, body := nginxServer.handleRequest(appStatusURL, "GET")
-	fmt.Printf("\nUrl: %s\nHttpCode: %d\nBody: %s\n", appStatusURL, httpCode, body)
+    //Add Terrorist
+    game.addTerrorist(TerroristDressType)
+    game.addTerrorist(TerroristDressType)
+    game.addTerrorist(TerroristDressType)
+    game.addTerrorist(TerroristDressType)
 
-	httpCode, body = nginxServer.handleRequest(appStatusURL, "GET")
-	fmt.Printf("\nUrl: %s\nHttpCode: %d\nBody: %s\n", appStatusURL, httpCode, body)
+    //Add CounterTerrorist
+    game.addCounterTerrorist(CounterTerroristDressType)
+    game.addCounterTerrorist(CounterTerroristDressType)
+    game.addCounterTerrorist(CounterTerroristDressType)
 
-	httpCode, body = nginxServer.handleRequest(appStatusURL, "GET")
-	fmt.Printf("\nUrl: %s\nHttpCode: %d\nBody: %s\n", appStatusURL, httpCode, body)
+    dressFactoryInstance := getDressFactorySingleInstance()
 
-	httpCode, body = nginxServer.handleRequest(createuserURL, "POST")
-	fmt.Printf("\nUrl: %s\nHttpCode: %d\nBody: %s\n", appStatusURL, httpCode, body)
-
-	httpCode, body = nginxServer.handleRequest(createuserURL, "GET")
-	fmt.Printf("\nUrl: %s\nHttpCode: %d\nBody: %s\n", appStatusURL, httpCode, body)
+    for dressType, dress := range dressFactoryInstance.dresses {
+        fmt.Printf("DressColorType: %s\nDressColor: %s\n", dressType, dress.getColor())
+    }
 }
