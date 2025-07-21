@@ -1,17 +1,15 @@
 package main
 
-import "fmt"
-
 func main() {
-	pizza := &VeggieMania{}
+	client := &Client{}
+	mac := &Mac{}
 
-  pizzaWithCheese := &CheeseTopping{
-      pizza: pizza,
-  }
+	client.InsertLightningConnectorIntoComputer(mac)
 
-  pizzaWithCheeseAndTomato := &TomatoTopping{
-      pizza: pizzaWithCheese,
-  }
+	windowsMachine := &Windows{}
+	windowsMachineAdapter := &WindowsAdapter{
+		machine: windowsMachine,
+	}
 
-  fmt.Printf("Price of Veggie Mania with tomato and cheese topping is %d\n", pizzaWithCheeseAndTomato.getPrice())
+	client.InsertLightningConnectorIntoComputer(windowsMachineAdapter)
 }
