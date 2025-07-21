@@ -1,15 +1,18 @@
 package main
 
 func main() {
-	client := &Client{}
-	mac := &Mac{}
+	cashier := &Cashier{}
 
-	client.InsertLightningConnectorIntoComputer(mac)
+	medical := &Medical{}
+	medical.setNext(cashier)
 
-	windowsMachine := &Windows{}
-	windowsMachineAdapter := &WindowsAdapter{
-		machine: windowsMachine,
-	}
+	doctor := &Doctor{}
+	doctor.setNext(medical)
 
-	client.InsertLightningConnectorIntoComputer(windowsMachineAdapter)
+	reception := &Reception{}
+	reception.setNext(doctor)
+
+	patient := &Patient{name: "abc"}
+
+	reception.execute(patient)
 }
